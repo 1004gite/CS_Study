@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "vector": "cpp",
+        "stdexcept": "cpp",
+        "string": "cpp",
+        "chrono": "cpp",
+        "queue": "cpp",
+        "stack": "cpp",
+        "__bit_reference": "cpp",
+        "iostream": "cpp"
+    }
+}
