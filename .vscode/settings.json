@@ -6,6 +6,8 @@
         "queue": "cpp",
         "utility": "cpp",
         "vector": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp"
     }
 }
