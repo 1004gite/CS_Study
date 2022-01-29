@@ -4,6 +4,7 @@
 풀이 1
 1. 1부터 가장 작은 수의 절반까지 모든 수의 나머지를 구한다.
     가장 작은 수의 절반을 초과하면 가장 작은 수를 나눌 수 없다.
+    -> 근데 가장 작은 수 자체는 전체의 약수가 될 수 있다.
 */
 
 #include <iostream>
@@ -40,8 +41,13 @@ int main(void){
                 break;
             }
         }
-        if(c) printf("%d ",i);
+        if(c) printf("%d\n",i);
     }
-    printf("\n");
+    for(int j = 0; j < tmpn; j++){
+        if(list[j]%min > 0){
+            return 0;
+        }
+    }
+    printf("%d\n",min);
 
 }
