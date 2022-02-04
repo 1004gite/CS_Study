@@ -47,16 +47,19 @@ int main(void){
             b = x;
         }
 
-        if(gcd(a,b) == 0){
+        if(gcd(a,b) == 1){
             // 서로소이면
             sum += (long)list[i];
             count++;
         }
     }
 
-    if(sum%count == 0){
-        printf("%ld\n",sum/count);
+    if(sum == 0){
+        printf("0\n");
     }
+    // else if(sum%count == 0){
+    //     printf("%lld\n",sum/count);
+    // }
     else{
         // 오차는 10^(-6)까지 허용한다.
         // 즉, 10^(-5)까지는 값이 정확해야 한다.
@@ -64,7 +67,7 @@ int main(void){
         sum /= count;
         long double result = (long double) sum;
         result /= 100000;
-        printf("%lf\n",result);
+        printf("%Lf\n",result);
     }
 
 }
