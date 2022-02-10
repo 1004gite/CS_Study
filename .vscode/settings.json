@@ -14,6 +14,7 @@
         "bitset": "cpp",
         "chrono": "cpp",
         "unordered_map": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "stack": "cpp"
     }
 }
