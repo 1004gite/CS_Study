@@ -19,21 +19,41 @@ N개의 강의가 있고 S에 시작하여 T에 끝난다.
 1. 강의실을 하나씩 돌며 배정이 완료될때까지 반복하지 않고
     겹치는 강의는 바로 가능한 강의실 혹은 새로운 강의실을 만들어 넣는다.
 
-풀이 3
+풀이 3 ==> 틀렸습니다.
 1. 이전의 풀이들의 경우 어떤 강의실에 겹치지 않게 할당 가능하면 바로 그 강의실에 할당하는 식으로 돌아간다.
     만약 2개 이상의 강의실에 할당이 가능하다면 이전강의와 지금강의사이의 간격이 최대한 짧은 강의실을 골라 배정한다.
+
+풀이 4 ==> 시간초과
+0. 처음부터 다시 접근한다.
+1. 어떤 강의를 할당한 시점에서 다음 강의를 고른다고 생각하자
+2. 모든 강의를 할당해야 하기 때문에 시작시간을 기준으로 정렬한다.
+    시작시간을 기준으로 두면 이전 강의가 끝난 시점 이후에 최대한 빨리 시작할 수 있는 강의를 찾을 수 있다.
+3. 시작시간을 기준으로 정렬했기 때문에 다음에 고려할 강의들은 그 이후에 시작한다.
+    즉, 이전 강의가 언제 끝나던 의미가 없다.(그 사이에 강의를 배치하는 경우가 없기 때문)
+
+풀이 5
+1. 강의실을 검사하는 과정에서 최대 O(N)이 걸릴 수 있다.
+2. heap을 이용하여 끝나는 시간이 가장 빠른 강의실을 기준으로 유지하여 가장 빨리 끝나는 강의실과만 비교한다. -> O(logN)
 */
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <utility>
+#include <queue>
 
 using namespace std;
 
 bool cmp(pair<long long, long long> a, pair<long long, long long> b){
-    if(a.second == b.second) return a.first < b.first;
-    return a.second < b.second;
+    return a.first < b.first;
 }
+
+struct Qcmp{
+    bool operator()(long long a, long long b){
+        // a가 b보다 크다면 true를 반환하여 swap한다.
+        // top에 최솟값이 오게 함
+        return a > b;
+    }
+};
 
 int main(void){
 
@@ -51,23 +71,19 @@ int main(void){
 
     sort(lec.begin(), lec.end(), cmp);
 
-    vector<long long> rooms; //가장 마지막 강의의 끝나는 시간을 보유한다.
+    priority_queue<long long, vector<long long>, Qcmp> rooms;
+    rooms.push(-1);
 
     for(int i = 0; i < n; i++){
-        int room = -1, max = -1;
-        for(int j = 0; j < rooms.size(); j++){
-            // 할당이 가능할 때 이전 강의가 가장 늦게 끝나는 강의실에 할당하여 비는 시간이 적게 한다.
-            if(rooms[j] <= lec[i].first && max < rooms[j]){
-                room = j;
-            }
-        }
-        if(room == -1){
-            // 가능한 강의실이 없으면 새로운 강의실 생성
-            rooms.push_back(lec[i].second);
+        // printf("lec%d info - start: %d, end: %d, topend: %d\n",i,lec[i].first,lec[i].second,rooms.top());
+        if(rooms.top() <= lec[i].first){
+            // 가장 빨리 끝나는 강의실과 비교 후 갱신
+            rooms.pop();
+            rooms.push(lec[i].second);
         }
         else{
-            // 가장 늦게 끝나는 강의실에 할당
-            rooms[room] = lec[i].second;
+            // 가장 빨리 끝나는 강의실에도 넣을 수 없다면 새로운 강의실 할당
+            rooms.push(lec[i].second);
         }
     }
 
