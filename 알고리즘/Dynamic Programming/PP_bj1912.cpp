@@ -33,24 +33,13 @@ int main(void){
     int now = INT_MIN;
 
     while(1){
-        if(start == n-1) break;
+        if(start == n || end == n) break;
 
-        if(end == n-1){
-            // end가 끝까지 갔을 때
-            if(now == INT_MIN) now = A[start]; 
-            else now -= A[start];
-            start++;
-        }
         else if(A[end] < 0){
             // 음수를 만났을 떄의 처리
             if(now == INT_MIN) now = A[end];
             else now += A[end];
             end++;
-            if(now <= 0){
-                // 가치가 없는 경우
-                start = end;
-                now = INT_MIN;
-            }
         }
         else{
             // 양수를 만났을 떄
@@ -60,6 +49,12 @@ int main(void){
         }
 
         if(now > max) max = now;
+        //최대값이 0보다 작은 경우를 고려하여 최대값 업데이트 후 가치판단
+        if(now <= 0){
+            // 가치가 없는 경우
+            start = end;
+            now = INT_MIN;
+        }
     }
 
     printf("%d\n",max);
