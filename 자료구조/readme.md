@@ -1,6 +1,15 @@
 # 자료구조 정리
 <br>  
 
+### Set  
+> 중복이 불가능하고 순서가 없다.  
+
+### Map  
+> key_value 쌍으로 이루어져 있고 key는 중복이 불가능하다.  
+
+### List  
+> 순서가 있는 collection 이다.  
+
 ### 최대 힙
 > 기본적으로 complete binary tree 이다  
 > 모든 부모가 자식보다 큰 값을 갖는 구조

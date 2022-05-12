@@ -7,3 +7,7 @@
 *META-INF/
 
 *.vscode/
+
+*.idea/
+
+*.iml
