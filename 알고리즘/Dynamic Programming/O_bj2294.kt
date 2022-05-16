@@ -8,12 +8,12 @@
 import java.util.*
 import java.io.*
 
-var dp = Array<Int>(10001, {10001})
+var dp = Array<Int>(10001) { 10001 }
 
-fun main(){
+fun main() {
 
-    val br = BufferedReader( InputStreamReader(System.`in`) )
-    val bw = BufferedWriter( OutputStreamWriter(System.`out`) )
+    val br = BufferedReader(InputStreamReader(System.`in`))
+    val bw = BufferedWriter(OutputStreamWriter(System.`out`))
 
     /* 
         val st = StringTokenizer( br.readLine() ) -> 한줄 토큰으로 읽어오기
@@ -22,27 +22,27 @@ fun main(){
         }
     */
 
-    val st = StringTokenizer( br.readLine() )
+    val st = StringTokenizer(br.readLine())
     val n = st.nextToken().toInt()
     val k = st.nextToken().toInt()
 
     var tmp = mutableSetOf<Int>()
-    for( i in 0 until n ){
-        tmp.add( br.readLine().toInt() )
+    for (i in 0 until n) {
+        tmp.add(br.readLine().toInt())
     }
     val coins = tmp.toList()
 
     dp[0] = 0
-    for (i in 1..k){
-        for(c in 0 until coins.size){
-            if( i - coins[c] < 0) continue
-            if( dp[i] > dp[i-coins[c]]+1 ) dp[i] = dp[i-coins[c]]+1
+    for (i in 1..k) {
+        for (c in 0 until coins.size) {
+            if (i - coins[c] < 0) continue
+            if (dp[i] > dp[i - coins[c]] + 1) dp[i] = dp[i - coins[c]] + 1
         }
     }
 
-    if(dp[k] == 10001) dp[k] = -1
+    if (dp[k] == 10001) dp[k] = -1
 
-    bw.write( dp[k].toString() + "\n" )
+    bw.write(dp[k].toString() + "\n")
     bw.flush()
 
     br.close()
