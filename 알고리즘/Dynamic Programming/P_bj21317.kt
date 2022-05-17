@@ -14,45 +14,48 @@
 import java.io.*
 import java.util.*
 
-private var dp = IntArray(21) {100001}
+class Bj21317 {
 
-data class mPair(var first:Int, var second:Int)
+    var dp = IntArray(21) { 100001 }
 
-fun main(){
+    data class mPair(var first: Int, var second: Int)
 
-    val br = BufferedReader( InputStreamReader(System.`in`) )
+    fun main() {
 
-    val n = br.readLine().toInt()
+        val br = BufferedReader(InputStreamReader(System.`in`))
 
-    // inedx번째 돌에서 (작은점프, 큰점프)를 하는데 드는 비용
-    var energe = Array(n) {mPair(0,0)}
+        val n = br.readLine().toInt()
 
-    var st : StringTokenizer
-    for( i in 1 until n){
-        st = StringTokenizer(br.readLine())
-        energe[i].first = st.nextToken().toInt()
-        energe[i].second = st.nextToken().toInt()
-    }
+        // inedx번째 돌에서 (작은점프, 큰점프)를 하는데 드는 비용
+        var energe = Array(n) { mPair(0, 0) }
 
-    val k = br.readLine().toInt()
-    var min = 100001
-
-    for(case in 0..17) {
-        dp = IntArray(21) {100001}
-        dp[1] = 0
-        for (i in 1..n - 2) {
-            if( i == case){
-                if(dp[i]+k < dp[i+3]) dp[i+3] = dp[i]+k
-                continue
-            }
-            if (dp[i] + energe[i].first < dp[i + 1]) dp[i + 1] = dp[i] + energe[i].first
-            if (dp[i] + energe[i].second < dp[i + 2]) dp[i + 2] = dp[i] + energe[i].second
+        var st: StringTokenizer
+        for (i in 1 until n) {
+            st = StringTokenizer(br.readLine())
+            energe[i].first = st.nextToken().toInt()
+            energe[i].second = st.nextToken().toInt()
         }
-        // n-1 -> n 만 따로
-        if (dp[n - 1] + energe[n - 1].first < dp[n]) dp[n] = dp[n - 1] + energe[n - 1].first
 
-        if(min > dp[n]) min = dp[n]
+        val k = br.readLine().toInt()
+        var min = 100001
+
+        for (case in 0..17) {
+            dp = IntArray(21) { 100001 }
+            dp[1] = 0
+            for (i in 1..n - 2) {
+                if (i == case) {
+                    if (dp[i] + k < dp[i + 3]) dp[i + 3] = dp[i] + k
+                    continue
+                }
+                if (dp[i] + energe[i].first < dp[i + 1]) dp[i + 1] = dp[i] + energe[i].first
+                if (dp[i] + energe[i].second < dp[i + 2]) dp[i + 2] = dp[i] + energe[i].second
+            }
+            // n-1 -> n 만 따로
+            if (dp[n - 1] + energe[n - 1].first < dp[n]) dp[n] = dp[n - 1] + energe[n - 1].first
+
+            if (min > dp[n]) min = dp[n]
+        }
+
+        print(min.toString() + "\n")
     }
-
-    print(min.toString()+"\n")
 }

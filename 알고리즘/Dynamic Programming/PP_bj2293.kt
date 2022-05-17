@@ -22,30 +22,32 @@
 import java.util.*
 import java.io.*
 
-private var dp = IntArray(10001) { 0 }
+class Bj2293 {
+    var dp = IntArray(10001) { 0 }
 
-fun main() {
+    fun main() {
 
-    val br = BufferedReader(InputStreamReader(System.`in`))
+        val br = BufferedReader(InputStreamReader(System.`in`))
 
-    var st = StringTokenizer(br.readLine())
+        var st = StringTokenizer(br.readLine())
 
-    val n = st.nextToken().toInt()
-    val k = st.nextToken().toInt()
+        val n = st.nextToken().toInt()
+        val k = st.nextToken().toInt()
 
-    var coins = IntArray(n)
-    for (i in 0 until n) {
-        coins[i] = br.readLine().toInt()
-    }
-    br.close()
-
-    dp[0] = 1
-    for(i in 0 until n){
-        for(j in coins[i]..k){
-            if(j-coins[i] < 0) continue
-            dp[j] += dp[j-coins[i]]
+        var coins = IntArray(n)
+        for (i in 0 until n) {
+            coins[i] = br.readLine().toInt()
         }
-    }
+        br.close()
 
-    print("${dp[k]} \n")
+        dp[0] = 1
+        for (i in 0 until n) {
+            for (j in coins[i]..k) {
+                if (j - coins[i] < 0) continue
+                dp[j] += dp[j - coins[i]]
+            }
+        }
+
+        print("${dp[k]} \n")
+    }
 }

@@ -12,46 +12,47 @@
 */
 
 import java.util.*
+class Bj10844 {
+    var mod: Int = 1000000000
+    var dp = Array<IntArray>(101) { IntArray(10) { 0 } }
 
-var mod : Int = 1000000000
-var dp = Array<IntArray>(101){ IntArray(10){ 0 } }
+    fun main() = with(System.`in`.bufferedReader()) {
 
-fun main() = with(System.`in`.bufferedReader()) {
+        // 띄어쓰기 단위로 받아오는 경우
+        // val st = StringTokenizer(readLine())
 
-    // 띄어쓰기 단위로 받아오는 경우
-    // val st = StringTokenizer(readLine())
+        // while (st.hasMoreTokens()) {
+        //     arr.add(st.nextToken().toInt())
+        // }
 
-    // while (st.hasMoreTokens()) {
-    //     arr.add(st.nextToken().toInt())
-    // }
-    
-    var n = readLine().toInt()
+        var n = readLine().toInt()
 
-    for( i in 1..9){
-        dp[1][i] = 1
-    }
-
-    for( i in 2..100){
-        dp[i][0] = addWithMod(dp[i][0], dp[i-1][1])
-        for( j in 1..8){
-            dp[i][j] = addWithMod(dp[i][j], dp[i-1][j-1])
-            dp[i][j] = addWithMod(dp[i][j], dp[i-1][j+1])
+        for (i in 1..9) {
+            dp[1][i] = 1
         }
-        dp[i][9] = addWithMod(dp[i][9], dp[i-1][8])
+
+        for (i in 2..100) {
+            dp[i][0] = addWithMod(dp[i][0], dp[i - 1][1])
+            for (j in 1..8) {
+                dp[i][j] = addWithMod(dp[i][j], dp[i - 1][j - 1])
+                dp[i][j] = addWithMod(dp[i][j], dp[i - 1][j + 1])
+            }
+            dp[i][9] = addWithMod(dp[i][9], dp[i - 1][8])
+        }
+
+        var result = 0;
+        for (i in 0..9) {
+            result = addWithMod(result, dp[n][i])
+            // println(dp[n][i])
+        }
+
+        println(result.toString())
     }
 
-    var result = 0;
-    for( i in 0..9){
-        result = addWithMod(result, dp[n][i])
-        // println(dp[n][i])
+    fun addWithMod(a: Int, b: Int): Int {
+        if ((a + b) >= mod)
+            return a + b - mod
+        else
+            return a + b
     }
-    
-    println(result.toString())
-}
-
-fun addWithMod(a : Int,b : Int) : Int{
-    if( (a+b) >= mod)
-        return a+b-mod
-    else
-        return a+b
 }

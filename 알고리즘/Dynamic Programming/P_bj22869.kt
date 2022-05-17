@@ -14,36 +14,38 @@ import java.io.*
 import java.util.*
 import kotlin.math.*
 
-private var dp = BooleanArray(5001) { false }
-private var A = IntArray(5001) { 0 }
+class Bj22869 {
+    var dp = BooleanArray(5001) { false }
+    var A = IntArray(5001) { 0 }
 
-fun main() {
+    fun main() {
 
-    val br = BufferedReader(InputStreamReader(System.`in`))
+        val br = BufferedReader(InputStreamReader(System.`in`))
 
-    var st = StringTokenizer(br.readLine())
+        var st = StringTokenizer(br.readLine())
 
-    val n = st.nextToken().toInt()
-    val k = st.nextToken().toInt()
+        val n = st.nextToken().toInt()
+        val k = st.nextToken().toInt()
 
-    st = StringTokenizer(br.readLine())
-    for (i in 1..n) {
-        A[i] = st.nextToken().toInt()
-    }
-    br.close()
+        st = StringTokenizer(br.readLine())
+        for (i in 1..n) {
+            A[i] = st.nextToken().toInt()
+        }
+        br.close()
 
-    dp[1] = true
-    for (i in 2..n) {
-        // (j-i)*(1+ |Ai-Aj|)
-        for (j in 1 until i) {
-            if (!dp[j]) continue
-            if ((i - j) * (1 + (A[j] - A[i]).absoluteValue) <= k) {
-                dp[i] = true
-                break
+        dp[1] = true
+        for (i in 2..n) {
+            // (j-i)*(1+ |Ai-Aj|)
+            for (j in 1 until i) {
+                if (!dp[j]) continue
+                if ((i - j) * (1 + (A[j] - A[i]).absoluteValue) <= k) {
+                    dp[i] = true
+                    break
+                }
             }
         }
-    }
 
-    if (dp[n]) print("YES\n")
-    else print("NO\n")
+        if (dp[n]) print("YES\n")
+        else print("NO\n")
+    }
 }
