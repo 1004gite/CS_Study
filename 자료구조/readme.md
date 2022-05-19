@@ -1,14 +1,23 @@
 # 자료구조 정리
 <br>  
 
+### List
+> 순서가 있는 collection 이다.  
+
+### Array  
+> 크기가 정적인 연속적인 배열  
+
+### ArrayList/ MutableList (Kotlin)  
+> 추가, 수정이 가능한 List  
+> mutableListOf, ArrayListOf 호출시 둘다 ArrayList를 반환한다.  
+> index참조시 O(1)의 복잡도를 가지고 중간에 삽입시 O(N)의 복잡도를 가진다.(배열의 특성)  
+> 꽉차면 기존 배열의 1.5배씩 늘리는 식으로 유지한다. -> 남는 메모리가 생긴다.
+
 ### Set  
 > 중복이 불가능하고 순서가 없다.  
 
 ### Map  
-> key_value 쌍으로 이루어져 있고 key는 중복이 불가능하다.  
-
-### List  
-> 순서가 있는 collection 이다.  
+> key_value 쌍으로 이루어져 있고 key는 중복이 불가능하다.
 
 ### 최대 힙
 > 기본적으로 complete binary tree 이다  
@@ -16,11 +25,13 @@
 
 ### Queue
 > 먼저 들어온 객체가 먼저 나가는 구조 (FIFO)   
-> 객체의 추가는 뒷부분에서만 일어나고 객체의 삭제는 앞에선만 일어난다.
+> 객체의 추가는 뒷부분에서만 일어나고 객체의 삭제는 앞에선만 일어난다.  
+> kotlin에서는 인터페이스만 제공하며 LinkedList로 객체를 생성한다.  
 
 ### Stack
 > 나중에 들어온 객체가 먼저 나가는 구조 (FILO)
-> 객체의 추가와 삭제가 모두 top에서 일어난다.
+> 객체의 추가와 삭제가 모두 top에서 일어난다.  
+> kotlin에서는 ArrayList로 이용 가능  
 
 ### Priority Queue
 > 중요도가 가장 높은 원소를 가장 위로 보내는 구조이다.  
@@ -40,6 +51,8 @@
 >> 중위 순회하면 (left, node, right) 위에서부터 깊이가 같다면 왼쪽부터 읽게 된다.  
 >> 후위 순회하면 깊은것부터 깊이가 같다면 왼쪽부터 읽게 된다.  
 
+
+- ### 번외  
 ### Two Pointer
 > start, end 두개의 pointer를 이용하여 문제를 푸는 기법  
 > > 모든 길이의 구간에서 특정 조건을 brute force하게 검사하는 데는 O(N^2)이 소요된다.  
