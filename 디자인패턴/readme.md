@@ -22,10 +22,16 @@
 > 
 > - ISP(Interface Separate Principle)  
 > 특정 클라이언트를 위한 인터페이스 여러개가 범용 인터페이스 한개보다 낫다.  
+> > ex) Car Interface에 Wheel, Handle에 대한 method가 무두 있다고 하자.  
+> > 만약 핸들이 없는 자율주행 자동차 class를 생성하려면 해당 class는 불필요한 handle method까지 상속받아야 한다.  
+> > 때문에, Handle, Wheel을 각각의 Interface로 나누는 것이 효율적이다.  
 > 
-
-
-
+> 
+> - DIP(Dependency Inversion Principle)
+> 구체화가 아닌 추상화에 의존해야 한다, 상위 객체와 하위 객체 모두 추상화에 의존해야 한다.  
+> > ex) 모니터의 종류가 {크기, 패널의 종류, 전압}에 의해 10종류가 있다고 하자.  
+> > 하위 객체에서 모니터를 상속받을 때 각각의 class를 상속받으면 하위 객체는 상위 객체의 모니터 하나하나에 의존적이게 된다.  
+> > 만약 Monitor라는 Interface가 있고 각 모니터가 이를 상속받으면 하위 객체는 Monitor Interface를 사용하므로써 상위 객체의 구현으로부터 자유로원진다.  
 
 ## mvc  
 Model, View, Controller로 이루어져 있다.  
