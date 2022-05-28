@@ -1,4 +1,45 @@
+## SOLID 원칙  
+> - SRP(Single Responsibility Principle)  
+> 한 클래스는 하나의 책임(역할)만 가져야 한다.  
+> 
+> 
+> - OCP(Open Close Principle)  
+> 소프트웨어 요소는 확장에는 열려있고, 변경에는 받혀 있어야 한다.  
+> > OPC는 (Interface와) 상속을 이용한다.  
+> > ex) Car라는 interface가 있고 이를 상속받는 여러 종류의 자동차가 있다.  
+> > 이때, 새로운 차량 class를 만드려면(확장) 기존의 Car를 변경하지 않고 Car를 상속받아 구현한다.  
+> 
+> 
+> - LSP(Liskov Substitution principle)  
+> 객체는 프로그램의 정확성을 깨트리지 않으면서 하위 타입의 instance로 바꿀 수 있어야 한다.  
+> > 어떤 class를 상속받는 자식 class를 만들 때 자식 class는 부모 class의 역할을 수행할 수 있어야 한다.  
+> > 만약 수행할 수 없다면 부모 class를 사용하는 함수에 자식 class를 넣게 되면 프로그램의 정학성이 깨지게 된다.  
+> > ex) Rctangle이라는 class에 w,h 변수가 있고 setter가 있다고 하자.  
+> > "정사각형은 직사각형이다" 라는 명제에 따라 Square class가 Rectangle class를 상속받는다.  
+> > 이떄, 정사각형은 가로,세로가 같기 때문에 w,h중 하나를 setting하면 나머지도 같게 해야한다.  
+> > 만약, 가로, 세로를 5,6 으로 세팅하고 넓이를 구하는 함수에 두 class를 이용한다면 다른 값이 나와 프로그램의 정확성이 꺠지게 된다.  
+> 
+> 
+> - ISP(Interface Separate Principle)  
+> 특정 클라이언트를 위한 인터페이스 여러개가 범용 인터페이스 한개보다 낫다.  
+> 
+
+
+
+
 ## mvc  
+Model, View, Controller로 이루어져 있다.  
+> - Model  
+> Model은 Controller의 요청을 받아 작업을 처리하고 View를 업데이트한다.  
+> 
+> 
+> - View  
+> View는 Controller에 Event를 전달한다.
+> 
+> 
+> - Controller  
+> Controller는 View에게 Event를 받고 Model에 작업을 요청한다.  
+> 간단한 작업의 경우 직접 View를 업데이트 할 수 있다.  
 
 
 ## mvp  
@@ -32,5 +73,12 @@ Model, View, ViewModel로 이루어져 있다.
 > 
 > - Acc ViewModel  
 > Acc ViewModel의 경우 ViewModel과 역할이 같으나 데이터의 생명주기를 같이 관리할 수 있다.  
-> Actvity가 finish하기 전까지 유지된다. 이떄, Activity의 Context를 가지게 되면 Activity가 finish되어도 객체가 없어지지 않을 수 있으니 주의해야 한다.
+> Actvity가 finish하기 전까지 유지된다. 이떄, Activity의 Context를 가지게 되면 Activity가 finish되어도 객체가 없어지지 않을 수 있으니 주의해야 한다.  
+
+
+## Singleton  
+하나의 class에 대해 하나의 전역 instance만을 소유한다.  
+> - instace를 전역으로 공유하기 때문에 데이터의 공유가 쉽다.  
+> - 멀티 쓰레드 환경에서는 syncronized 키워드를 이용하는 것이 좋고 dead lock에 유의해야 한다.  
+> 
 > 
