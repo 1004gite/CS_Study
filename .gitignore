@@ -11,3 +11,7 @@
 *.idea/
 
 *.iml
+
+*.java
+
+*.class
