@@ -14,19 +14,19 @@
 * 2. 벽이 있는 관계는 간선을 1로보고 나머지는 0으로 본다.
 *
 * 풀이 3
-* 1.
+* 1. pq대신 방문 기록을 사용항 최소 node를 구한다.
 * */
 
 import java.util.*
 import java.io.*
 
 class bj1261 {
-
     data class Node(var row: Int, var col: Int)
 
     // 0,0 -> n-1,m-1
     private var board = Array(100) { IntArray(100) }
     private var dijk = Array(100) { IntArray(100) { 10001 } }
+    private var visited = Array(100){BooleanArray(100)}
     fun solve() {
         val br = BufferedReader(InputStreamReader(System.`in`))
         var st = StringTokenizer(br.readLine())
@@ -42,42 +42,50 @@ class bj1261 {
             }
         }
 
-        // a의 value가 더 작으면 높은 우선순위를 가진다.
-        var pq = PriorityQueue<Node> { a, b -> dijk[b.row][b.col]- dijk[a.row][a.col]}
+        var index = Node(0,0)
         dijk[0][0] = 0
-        pq.add(Node(0, 0))
 
-        while (pq.isNotEmpty()) {
+        while (index.row != -1) {
 
-            val now = pq.element()
-            val r = now.row
-            val c = now.col
-            pq.remove()
-//            // 지금 값이 더 작으면 다른 node에 의해 업데이트 된 것임
-//            if (dijk[r][c] < v) continue
+            val r = index.row
+            var c = index.col
+            visited[r][c] = true
 
             // 상
             if (c > 0 && dijk[r][c] + board[r][c - 1] < dijk[r][c - 1]) {
                 dijk[r][c - 1] = dijk[r][c] + board[r][c - 1]
-                pq.add(Node(r, c-1))
             }
             // 하
             if (c < m - 1 && dijk[r][c] + board[r][c + 1] < dijk[r][c + 1]) {
                 dijk[r][c + 1] = dijk[r][c] + board[r][c + 1]
-                pq.add(Node(r, c+1))
             }
             // 좌
             if (r > 0 && dijk[r][c] + board[r - 1][c] < dijk[r - 1][c]) {
                 dijk[r - 1][c] = dijk[r][c] + board[r - 1][c]
-                pq.add(Node(r-1, c))
             }
             // 우
             if (r < n - 1 && dijk[r][c] + board[r + 1][c] < dijk[r + 1][c]) {
                 dijk[r + 1][c] = dijk[r][c] + board[r + 1][c]
-                pq.add(Node(r+1, c))
             }
+
+            index = getMinimun(n,m)
         }
         print(dijk[n-1][m-1].toString()+"\n")
+    }
+
+    fun getMinimun(n:Int,m:Int): Node{
+        var node = Node(-1,-1)
+        var value = 10001
+        for( x in 0 until n){
+            for( y in 0 until m){
+                if(visited[x][y]) continue
+                if(value > dijk[x][y]){
+                    node = Node(x,y)
+                    value = dijk[x][y]
+                }
+            }
+        }
+        return node
     }
 
 }
