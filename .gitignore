@@ -16,6 +16,4 @@
 
 *.class
 
-*/out
-
-*/out/*
+out/
