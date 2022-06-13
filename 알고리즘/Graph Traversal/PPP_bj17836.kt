@@ -19,6 +19,11 @@
 * 1. 무기를 얻었을 때 업데이트되는 경로만 탐색에 넣게 되면 비효율적이라도 무기가 있어야만 갈 수 있는 길을 갈 수 없다.
 * 2. 무기를 얻은 이후의 값을 따로 관리한다.
 *   -> 무기를 얻으면 가장 가깝게 이동할 수 있으므로 무기를 얻은 즉시 값을 계산할 수 있다.
+*
+* 풀이 4
+* 1. 간선의 비용이 모두 1이기 때문에 dijk을 안써도 될것 같다.
+* -> 깊이가 기준이기 때문에 어차피 가까운 node를 먼저 방문하게 된다.
+* -> 시간이 훤씬 빨랐다.
 * */
 
 import java.io.*
@@ -54,21 +59,22 @@ class bj17836 {
             }
         }
         // a가 더 크면 바꾼다.
-        var pq: PriorityQueue<mPoint> = PriorityQueue { a, b ->
-            dijk[a.row][a.col] - dijk[b.row][b.col]
-        }
+//        var pq: PriorityQueue<mPoint> = PriorityQueue { a, b ->
+//            dijk[a.row][a.col] - dijk[b.row][b.col]
+//        }
+        var q : Queue<mPoint> = LinkedList()
         if (board[0][0] == 2) {
             if (m + n > t) print("Fail\n")
             else print("${m + n}\n")
             return
         }
-        pq.add(mPoint(0, 0))
+        q.add(mPoint(0, 0))
         dijk[0][0] = 0
         var weaponDistance = Int.MAX_VALUE
         while (true) {
-            if (pq.isEmpty()) break
-            val now = pq.element()
-            pq.remove()
+            if (q.isEmpty()) break
+            val now = q.element()
+            q.remove()
             visited[now.row][now.col] = true
             if (board[now.row][now.col] == 2){
                 // 무기까지의 최단거리 결정됨
@@ -83,7 +89,7 @@ class bj17836 {
                 if (board[nowR][nowC] == 1) continue
                 if (dijk[nowR][nowC] > dijk[now.row][now.col] + 1) {
                     dijk[nowR][nowC] = dijk[now.row][now.col] + 1
-                    pq.add(mPoint(nowR, nowC))
+                    q.add(mPoint(nowR, nowC))
                 }
             }
 
