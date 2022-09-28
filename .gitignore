@@ -12,8 +12,6 @@
 
 *.iml
 
-*.java
-
 *.class
 
 out/
