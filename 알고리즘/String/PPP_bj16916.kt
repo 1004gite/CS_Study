@@ -1,3 +1,4 @@
+//class bj16916{}
 fun main(){
     val str = readln()
     val regex = readln()
@@ -9,8 +10,8 @@ fun main(){
                 failIndex[i] = failIndex[checkIndex]+1
                 break
             }
-            if(checkIndex == 0) break
-            checkIndex = failIndex[checkIndex]
+            if(failIndex[checkIndex] == 0) break
+            checkIndex = failIndex[failIndex[checkIndex]-1]
         }
     }
 
