@@ -34,6 +34,7 @@ import kotlin.math.*
  * 3. linkedList에 붙이고 떼는 부분에서 시간이 많이 걸리는 것 같음
  *
  * -> linkedList 방식에서 booleanArray에 표시하는 방식으로 바꿨더니 시간이 거의 1/10으로 줄었다!!
+ * -> 주석이 좀 많았는데 지웠더니 10ms 줄었다?
  * */
 
 class bj15686 {
