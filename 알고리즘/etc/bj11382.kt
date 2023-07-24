@@ -1,0 +1,1 @@
+fun main() = println("${readln().split(' ').map{it.toLong()}.sum() }")
