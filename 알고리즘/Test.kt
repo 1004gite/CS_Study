@@ -1,16 +1,14 @@
-import java.util.Deque
-import java.util.LinkedList
-import java.util.Stack
+import java.util.ArrayList
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
 fun main() {
 
-    val stack = ArrayDeque<Int>()
+    val stack = mutableListOf<Int>()
     // 삽입
     val push = measureNanoTime {
         repeat(100000) {
-            stack.addLast(1)
+            stack.add(1)
         }
     }
     val pop = measureNanoTime {
