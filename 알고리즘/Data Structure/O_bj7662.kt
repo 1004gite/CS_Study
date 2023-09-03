@@ -46,8 +46,6 @@ fun main() {
                 maxHeap.myRemove()?.valid = false
             }
 
-        }
-
         val max = maxHeap.myRemove()
         val min = minHeap.myRemove()
 
