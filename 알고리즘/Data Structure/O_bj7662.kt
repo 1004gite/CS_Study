@@ -22,10 +22,10 @@ fun main() {
     // testCase의 개수만큼 반복
     repeat(br.readLine().toInt()) {
 
-
         // 최소 최대 heap 선언
-        val maxHeap = PriorityQueue<MyNum>{ a,b -> b.value - a.value }
-        val minHeap = PriorityQueue<MyNum>{ a,b -> a.value - b.value }
+        // 비교 과정에서 +,- 연산 사용시 Integer의 max값을 넘어갈 수 있다.
+        val maxHeap = PriorityQueue<MyNum>{ a,b -> b.value.compareTo(a.value) }
+        val minHeap = PriorityQueue<MyNum>{ a,b -> a.value.compareTo(b.value) }
 
         // 명령의 개수만큼 반복
         repeat(br.readLine().toInt()) {
@@ -34,18 +34,18 @@ fun main() {
             val command = tmp[0][0]
             val num = tmp[1].toInt()
 
-            if(command == 'I') {
+            if (command == 'I') {
                 // 두 힙에 같은 객체를 모두 삽입
                 val myNum = MyNum(num)
                 maxHeap.add(myNum)
                 minHeap.add(myNum)
-            } else if(num < 0) {
+            } else if (num < 0) {
                 // 최솟갑 삭제 및 유효성 false로 설정
                 minHeap.myRemove()?.valid = false
             } else {
                 maxHeap.myRemove()?.valid = false
             }
-
+        }
         val max = maxHeap.myRemove()
         val min = minHeap.myRemove()
 
