@@ -7,7 +7,7 @@ class bj9663 {
 // 한 행에 1개를 놓을 수 있다.
 
 var result = 0
-var n = 0
+var ern = 0
 val board = IntArray(15)
 
 fun main(){
